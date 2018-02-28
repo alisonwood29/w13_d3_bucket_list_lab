@@ -16,9 +16,9 @@ BucketListView.prototype.clear = function () {
 BucketListView.prototype.render = function (country) {
   const ul = document.getElementById('country-list');
   const li = document.createElement('li');
-  li.innerText = country;
+  li.innerText = country.name;
 
-  ul.appendChild('li');
+  ul.appendChild(li);
 }
 
 module.exports = BucketListView;
