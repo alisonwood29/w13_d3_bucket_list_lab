@@ -32,6 +32,19 @@ MongoClient.connect('mongodb://localhost:27017', function (err, client) {
     });
   });
 
+  server.get('/countries', function (req, res) {
+    const countriesCollection = db.collection('countries');
+
+    countriesCollection.find().toArray(function (err, allCountries) {
+      if(err){
+        console.log(err);
+        res.status(500);
+        res.send();
+      }
+      res.json(allCountries);
+    })
+  })
+
 
   server.listen(3000, function () {
     console.log('App is running on port ' + this.address().port);
