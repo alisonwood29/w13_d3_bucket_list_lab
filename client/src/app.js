@@ -10,6 +10,8 @@ const app = function () {
   countriesRequest.get(populateDropDown);
   bucketlistRequest.get(getBucketListRequestComplete);
 
+  const addCountryButton = document.getElementById('add-country');
+  addCountryButton.addEventListener('click', onAddButtonClick);
 
 
 }
@@ -31,6 +33,23 @@ const getBucketListRequestComplete = function (countries) {
   countries.forEach(function (country) {
     bucketListView.addCountry(country);
   })
+}
+
+const onAddButtonClick = function (event) {
+  event.preventDefault();
+  // console.log(event);
+  // console.log('button clicked');
+  const countryInput = document.getElementById('country').value;
+  // console.log(countryInput);
+  const countryToSend = {
+    name: countryInput
+  };
+
+  bucketlistRequest.post(addRequestComplete, countryToSend);
+}
+
+const addRequestComplete = function (country) {
+  bucketListView.addCountry(country);
 }
 
 document.addEventListener('DOMContentLoaded', app);
