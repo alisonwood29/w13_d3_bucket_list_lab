@@ -1,0 +1,23 @@
+.container {
+  width: 100%;
+}
+
+.form-container{
+  width: 100%;
+  background-color: salmon;
+  margin: 0;
+  padding: 10px;
+  height: 50px;
+}
+
+.list-container{
+  width: 50%;
+  background-color: papayaWhip;
+  margin: 0;
+  padding: 0;
+}
+
+h1 {
+  text-align: center;
+  background-color: darkSeaGreen;
+}

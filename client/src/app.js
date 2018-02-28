@@ -13,7 +13,6 @@ const app = function () {
   const addCountryButton = document.getElementById('add-country');
   addCountryButton.addEventListener('click', onAddButtonClick);
 
-
 }
 
 
