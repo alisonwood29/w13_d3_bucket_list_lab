@@ -1,11 +1,11 @@
 const express = require('express');
-const app = express();
+const server = express();
 const MongoClient = require('mongodb').MongoClient;
 const bodyParser = require('body-parser');
 
-app.use(bodyParser.json());
-app.use(express.static('client/build'));
-app.use(bodyParser.urlencoded({extended: true}));
+server.use(bodyParser.json());
+server.use(express.static('client/build'));
+server.use(bodyParser.urlencoded({extended: true}));
 
 MongoClient.connect('mongodb://localhost:27017', function (err, client) {
   if(err){
@@ -16,8 +16,24 @@ MongoClient.connect('mongodb://localhost:27017', function (err, client) {
   const db = client.db('bucketlist');
   console.log('connected to db');
 
+  server.post('/countries', function (req, res) {
+    const countriesCollection = db.collection('countries');
+    const countryToSave = req.body;
 
-  app.listen(3000, function () {
+    countriesCollection.save(countryToSave, function (err, result) {
+      if(err){
+        console.log(err);
+        res.status(500);
+        res.send();
+      }
+      res.status(201);
+      res.json(result.ops[0]);
+      console.log('saved to db');
+    });
+  });
+
+
+  server.listen(3000, function () {
     console.log('App is running on port ' + this.address().port);
   });
 
